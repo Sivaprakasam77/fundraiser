@@ -1,7 +1,7 @@
-import { createStyles, makeStyles } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) =>
-  createStyles({
+  ({
     center: {
       position: "absolute",
       top: "50%",
