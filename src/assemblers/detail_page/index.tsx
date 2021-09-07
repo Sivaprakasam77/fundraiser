@@ -26,7 +26,7 @@ export default function Detail(props: { referal: boolean }) {
       });
     functions
       .ApiCall({
-        method: "POST",
+        method: "GET",
         source: `detail/${id}`,
       })
       .then((info) => {
