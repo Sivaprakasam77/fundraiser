@@ -88,17 +88,14 @@ const raiseFund = async (data: fund, id: string) => {
 // Detail of single fund
 const detailFund = async (data: params) => {
   const { fundId } = data,
-    toId = (await DECODE(fundId)).split("|")[0];
-  console.log(toId);
-  const raiseRef = await userRef.doc(toId).collection("funds").doc(fundId);
-  console.log(raiseRef);
-  const shares = (await raiseRef.collection("referals").get()).docs.map(
+    toId = (await DECODE(fundId)).split("|")[0],
+  raiseRef = await userRef.doc(toId).collection("funds").doc(fundId),
+  shares = (await raiseRef.collection("referals").get()).docs.map(
       (doc) => doc.data().amount
     ),
     suporters = (
       await raiseRef.collection("supporters").orderBy("amount", "desc").get()
     ).docs.map((doc) => doc.data());
-  console.log(fundId, toId);
 
   return await db
     .collectionGroup("funds")

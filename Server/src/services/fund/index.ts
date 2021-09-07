@@ -96,7 +96,7 @@ const referalFund = async (data: params, id: string) => {
       .doc(fundId)
       .collection("referals")
       .doc(id);
-  console.log(raiseRef);
+      
   return await raiseRef
     .update({ refered: true })
     .then(() => {

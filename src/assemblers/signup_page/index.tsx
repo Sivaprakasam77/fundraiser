@@ -36,8 +36,6 @@ export default function SignUp() {
         confirmPassword: { value: string };
       };
 
-    console.log(form);
-
     functions.Validate(form) &&
       (await functions.ApiCall({
         method: "POST",
