@@ -1,14 +1,20 @@
 import { firebase } from "../../firebase";
 import "../type";
 
-const { userRef, UploadImg,ENCODE,DECODE } = firebase;
+const { userRef, UploadImg, ENCODE, DECODE } = firebase;
 
 // Fund Collector request creation
 const createFund = async (data: fund, id: string) => {
   const { image, title, location, date, goal, overview, updates } = data,
     fundId = await ENCODE(`${id}|${Date.now()}`),
     user = <FirebaseFirestore.DocumentData>(await userRef.doc(id).get()).data(),
-    imageURL = await UploadImg(image, `funds/${title}`);
+    imageURL = await UploadImg(image, `funds/${title + Date.now()}`)
+      .then((info) => {
+        return info;
+      })
+      .catch(() => {
+        return null;
+      });
   return await userRef
     .doc(id)
     .collection("funds")
@@ -90,7 +96,7 @@ const referalFund = async (data: params, id: string) => {
       .doc(fundId)
       .collection("referals")
       .doc(id);
-      
+
   return await raiseRef
     .update({ refered: true })
     .then(() => {

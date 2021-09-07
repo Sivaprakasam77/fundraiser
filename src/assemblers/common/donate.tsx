@@ -9,6 +9,7 @@ import {
 } from "@material-ui/core";
 import React, { useState } from "react";
 import functions from "./commonfun";
+import { useHistory } from "react-router";
 
 interface donate {
   title: string;
@@ -19,10 +20,11 @@ interface donate {
 
 export default function Donate(props: donate) {
   const [amount, setAmount] = useState<string>("100"),
-    [message, setMessage] = useState<string>();
+    [message, setMessage] = useState<string>(),
+    history = useHistory();
   // API call
   async function call() {
-    (await functions.apiCall({
+    (await functions.ApiCall({
       method: "POST",
       source: "raise",
       body: JSON.stringify({
@@ -31,6 +33,7 @@ export default function Donate(props: donate) {
         message: message,
       }),
       dest: "/",
+      history: history,
     })) && props.close();
   }
 

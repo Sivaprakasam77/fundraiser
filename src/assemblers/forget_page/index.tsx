@@ -31,7 +31,7 @@ export default function Forget() {
         email: { value: string };
       };
     functions.Validate(form) &&
-      (await functions.apiCall({
+      (await functions.ApiCall({
         method: "POST",
         body: JSON.stringify({
           email: form.email.value,

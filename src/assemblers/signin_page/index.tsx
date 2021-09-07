@@ -6,10 +6,12 @@ import Facebook from "../../assets/web/sign_in/Mask_Group_7.png";
 import useStyles from "../../styles";
 import { Cbutton, CtextField, Logo, Separate, functions } from "../common";
 import { SyntheticEvent } from "react";
+import { useHistory } from "react-router";
 
 // Sign In page
 export default function SignIn() {
-  const classes = useStyles();
+  const classes = useStyles(),
+    history = useHistory();
 
   // API call
   async function call(e: SyntheticEvent) {
@@ -17,7 +19,7 @@ export default function SignIn() {
     const form = e.target as EventTarget &
       form[] & { email: { value: string }; password: { value: string } };
     functions.Validate(form) &&
-      (await functions.apiCall({
+      (await functions.ApiCall({
         method: "POST",
         body: JSON.stringify({
           email: form.email.value,
@@ -26,6 +28,7 @@ export default function SignIn() {
         source: "signin",
         message: "Login successful!",
         dest: "/",
+        history: history,
       }));
   }
 
@@ -94,7 +97,7 @@ export default function SignIn() {
                 />
               </Grid>
               <Grid item xs={12}>
-                <Link href="#/forget">Forget password?</Link>
+                <Link href="/forget">Forget password?</Link>
               </Grid>
               <Grid item xs={12}>
                 <Button
@@ -107,7 +110,7 @@ export default function SignIn() {
               </Grid>
               <Grid item xs={12} style={{ textAlign: "center" }}>
                 Don't have an account?{" "}
-                <Link color="primary" href="#/signup">
+                <Link color="primary" href="/signup">
                   SignUp
                 </Link>
               </Grid>

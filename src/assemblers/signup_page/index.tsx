@@ -14,11 +14,13 @@ import Facebook from "../../assets/web/sign_in/Mask_Group_7.png";
 import useStyles from "../../styles";
 import { FormEvent, SyntheticEvent, useState } from "react";
 import { Cbutton, CtextField, Logo, Separate, functions } from "../common";
+import { useHistory } from "react-router";
 
 // Sign Up page
 export default function SignUp() {
   const classes = useStyles(),
-    [image, setImage] = useState<string | boolean>(false);
+    [image, setImage] = useState<string | boolean>(false),
+    history = useHistory();
 
   // API call
   async function call(e: SyntheticEvent) {
@@ -34,8 +36,10 @@ export default function SignUp() {
         confirmPassword: { value: string };
       };
 
+    console.log(form);
+
     functions.Validate(form) &&
-      (await functions.apiCall({
+      (await functions.ApiCall({
         method: "POST",
         body: JSON.stringify({
           profile: image,
@@ -49,9 +53,10 @@ export default function SignUp() {
         source: "signup",
         message: "Registration successful!",
         dest: "/",
+        history: history,
       }));
   }
-  
+
   return (
     <form onSubmit={call}>
       <Grid
@@ -137,6 +142,12 @@ export default function SignUp() {
                 </label>
               </Grid>
               <Grid item xs={6}>
+                <input
+                  name="profile"
+                  type="text"
+                  value={image as string}
+                  style={{ display: "none" }}
+                />
                 <CtextField
                   name="firstName"
                   type="text"
@@ -195,7 +206,7 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12} style={{ textAlign: "center" }}>
                 Already have an account?{" "}
-                <Link color="primary" href="#/signin">
+                <Link color="primary" href="/signin">
                   Sign In
                 </Link>
               </Grid>

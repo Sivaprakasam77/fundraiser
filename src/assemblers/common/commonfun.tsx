@@ -10,7 +10,6 @@ const Status = (type: AlertProps["severity"], cont: string) => {
   return render(
     <Snackbar
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      // key="topright"
       style={{ zIndex: 200 }}
       open
       autoHideDuration={5000}
@@ -27,6 +26,7 @@ const Status = (type: AlertProps["severity"], cont: string) => {
 const Validate = (form: form[]) => {
   const validate: valid = {
     profile: /data:image\/[a-zA-Z]*;base64,[^"]*/g,
+    image: /data:image\/[a-zA-Z]*;base64,[^"]*/g,
     firstName: /[a-zA-Z0-9-_]+/g,
     lastName: /[a-zA-Z0-9-_]+/g,
     email: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/g,
@@ -47,7 +47,7 @@ const Validate = (form: form[]) => {
   return true;
 };
 
-const apiCall = async (req: apicall) => {
+const ApiCall = async (req: apicall) => {
   render(<LinearProgress />, document.getElementById("status"));
   const info = await fetch(
     `${process.env.REACT_APP_BURL}/api/v1/${req.source}`,
@@ -72,13 +72,13 @@ const apiCall = async (req: apicall) => {
     .catch((err) => {
       return err;
     });
-
+  console.log(info);
   if (!info.err && info.message !== "Failed to fetch") {
     req.message ? Status("success", req.message) : Clear();
     if (req.source === "signin" || req.source === "signup")
       document.cookie = `FSR=${info.message}; path=/`;
     if (req.source === "signout") document.cookie = "FSR=; path=/";
-    if (req.dest) window.location.href = req.dest;
+    if (req.dest) req.history.push(req.dest);
     return (info.message === "Success" && true) || info.message;
   } else {
     req.message ? Status("error", info.message) : Clear();
@@ -87,10 +87,10 @@ const apiCall = async (req: apicall) => {
 };
 
 const Share = (id: string) => {
-  const url = encodeURI(process.env.REACT_APP_URL + "/%23/referal/" + id);
+  const url = process.env.REACT_APP_URL + "/%23/referal/" + id;
   window.open(`whatsapp://send?text=Form the Fundraiser ${url}`);
 };
 
-const functions = { Validate, apiCall, Share };
+const functions = { Validate, ApiCall, Share };
 
 export default functions;

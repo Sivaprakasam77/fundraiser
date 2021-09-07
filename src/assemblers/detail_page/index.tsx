@@ -20,19 +20,19 @@ export default function Detail(props: { referal: boolean }) {
 
   useEffect(() => {
     props.referal &&
-      functions.apiCall({
+      functions.ApiCall({
         method: "GET",
         source: `referal/${id}`,
       });
     functions
-      .apiCall({
+      .ApiCall({
         method: "POST",
         source: `detail/${id}`,
       })
       .then((info) => {
         info && setData(info);
       });
-  });
+  },[]);
 
   return (
     <>

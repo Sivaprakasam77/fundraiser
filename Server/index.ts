@@ -10,7 +10,7 @@ import { routeV1 } from "./src/routes";
 import { error } from "./src/middlewares";
 
 const CorsOptions = {
-  origin: ["http://localhost:3000", "https://fundraiserui.herokuapp.com"],
+  origin: process.env.ORGINS,
   credentials: true,
   optionSuccessStatus: 200,
 };

@@ -4,11 +4,13 @@ import BackImgM from "../../assets/mobile/sign_in/signup_img.png";
 import useStyles from "../../styles";
 import { FormEvent, SyntheticEvent, useState } from "react";
 import { CtextField, Logo, functions } from "../common";
+import { useHistory } from "react-router";
 
 // Sign Up page
 export default function Fund() {
   const classes = useStyles(),
-    [image, setImage] = useState<string | boolean>(false);
+    [image, setImage] = useState<string | boolean>(false),
+    history = useHistory();
 
   // API call
   async function call(e: SyntheticEvent) {
@@ -24,7 +26,7 @@ export default function Fund() {
         updates: { value: string };
       };
     functions.Validate(form) &&
-      (await functions.apiCall({
+      (await functions.ApiCall({
         method: "POST",
         body: JSON.stringify({
           image: image,
@@ -38,6 +40,7 @@ export default function Fund() {
         source: "create",
         message: "successful!",
         dest: "/",
+        history: history,
       }));
   }
 
@@ -119,6 +122,12 @@ export default function Fund() {
                 </label>
               </Grid>
               <Grid item xs={6}>
+                <input
+                  name="image"
+                  type="text"
+                  value={image as string}
+                  style={{ display: "none" }}
+                />
                 <CtextField
                   name="title"
                   type="text"

@@ -14,7 +14,7 @@ export default function Home() {
 
   useEffect(() => {
     functions
-      .apiCall({
+      .ApiCall({
         method: "GET",
         source: "dashboard",
       })
@@ -25,7 +25,7 @@ export default function Home() {
 
   // Search call
   async function call(text: string) {
-    const info = await functions.apiCall({
+    const info = await functions.ApiCall({
       method: "POST",
       source: "search",
       body: JSON.stringify({

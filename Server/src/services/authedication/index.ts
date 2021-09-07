@@ -41,7 +41,16 @@ const signup = async (data: User) => {
         .catch((err) => {
           return { err: true, message: err.message };
         }),
-      image = await UploadImg(profile, `users/${firstName} ${lastName}`),
+      image = await UploadImg(
+        profile,
+        `users/${firstName} ${lastName} ${Date.now()}`
+      )
+        .then((info) => {
+          return info;
+        })
+        .catch(() => {
+          return null;
+        }),
       uid = <string>fbauth.getAuth().currentUser?.uid;
     if (!creds.err) {
       return await userRef

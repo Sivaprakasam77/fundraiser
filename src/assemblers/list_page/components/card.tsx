@@ -37,7 +37,7 @@ export default function CardView(props: carddata) {
       <Grid item xs key={props.fundId}>
         <Card elevation={5} className={classes.card}>
           <CardActionArea
-            href={`#/detail/${props.fundId}`}
+            href={`/detail/${props.fundId}`}
             style={{ width: "100%", height: "40%" }}
           >
             <CardMedia className={classes.cardimg} image={props.image} />

@@ -9,21 +9,24 @@ import {
 import { useState } from "react";
 import { Send } from "@material-ui/icons";
 import { functions } from "../../common";
+import { useHistory } from "react-router-dom";
 
 export default function Comment(props: { data: comments[]; id: string }) {
-  const [text, setText] = useState<string>();
+  const [text, setText] = useState<string>(),
+  history=useHistory();
   // API call
   function call() {
     text === "" ||
       functions
-        .apiCall({
+        .ApiCall({
           method: "POST",
           source: "comment",
           body: JSON.stringify({
             fundId: props.id,
             comment: text,
           }),
-          dest: `#/detail/${props.id}`,
+          dest: `/detail/${props.id}`,
+          history: history,
         })
         .then((info) => {
           info && setText(info);

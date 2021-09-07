@@ -17,7 +17,7 @@ export default function Navigation(props: {
   search?: (text: string) => Promise<void>;
 }) {
   const classes = useStyles(),
-    [val, setValue] = useState<string>(window.location.hash),
+    [val, setValue] = useState<string>(window.location.pathname),
     [open, setOpen] = useState<boolean>(false),
     [text, setText] = useState<string>(""),
     [title, setTitle] = useState([]),
@@ -40,7 +40,7 @@ export default function Navigation(props: {
   function initcall() {
     setOpen(true);
     functions
-      .apiCall({
+      .ApiCall({
         method: "GET",
         source: "init_search",
       })
@@ -51,7 +51,7 @@ export default function Navigation(props: {
 
   function signout() {
     functions
-      .apiCall({
+      .ApiCall({
         method: "GET",
         source: "signout",
       })
@@ -65,7 +65,7 @@ export default function Navigation(props: {
 
   useEffect(() => {
     functions
-      .apiCall({
+      .ApiCall({
         method: "GET",
         source: "user",
       })
@@ -131,9 +131,9 @@ export default function Navigation(props: {
           </Button>
         )}
         <Button
-          className={val === "#/" ? classes.button1 : classes.button}
-          variant={val === "#/" ? "contained" : "outlined"}
-          href={user.status ? "#/fund" : "#/signin"}
+          className={val === "/" ? classes.button1 : classes.button}
+          variant={val === "/" ? "contained" : "outlined"}
+          href={user.status ? "/fund" : "/signin"}
         >
           Start a Fundraiser
         </Button>
@@ -169,7 +169,7 @@ export default function Navigation(props: {
               </List>
             )}
           </Button>
-        )) || <Button href="#/signin">Sign In</Button>}
+        )) || <Button href="/signin">Sign In</Button>}
       </div>
     </Paper>
   );

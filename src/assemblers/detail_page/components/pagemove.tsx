@@ -20,10 +20,10 @@ export default function PageMove(props: countid) {
   }, [props.id]);
   return (
     <div className={classes.arrow}>
-      <IconButton href={"#/detail/" + nval}>
+      <IconButton href={"/detail/" + nval}>
         <ArrowBackIosRounded style={{ height: "3rem", width: "3rem" }} />
       </IconButton>
-      <IconButton href={"#/detail/" + pval}>
+      <IconButton href={"/detail/" + pval}>
         <ArrowForwardIosRounded style={{ height: "3rem", width: "3rem" }} />
       </IconButton>
     </div>

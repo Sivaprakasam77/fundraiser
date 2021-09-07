@@ -43,7 +43,7 @@ router.route("/edit_fund").post(requests.editFund);
 router.route("/delete_fund").post(requests.deleteFund);
 
 // Detail Fund
-router.route("/detail/:fundId").post(requests.detailFund);
+router.route("/detail/:fundId").get(requests.detailFund);
 
 // Donate fund
 router.route("/raise").post(requests.raiseFund);

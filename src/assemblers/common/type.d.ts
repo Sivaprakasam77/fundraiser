@@ -21,6 +21,7 @@ interface form {
 
 interface valid {
   profile: RegExp;
+  image: RegExp;
   firstName: RegExp;
   lastName: RegExp;
   email: RegExp;
@@ -35,6 +36,7 @@ interface apicall {
   source: string;
   dest?: string;
   message?: string;
+  history?: History<unknown>;
 }
 
 interface Window {
