@@ -89,7 +89,7 @@ const deleteFund = async (data: fund, id: string) => {
 // Refereal fund
 const referalFund = async (data: params, id: string) => {
   const { fundId } = data,
-    toId = (await DECODE(fundId)).split("|")[0],
+    toId = await (await DECODE(fundId)).split("|")[0],
     raiseRef = await userRef
       .doc(toId)
       .collection("funds")

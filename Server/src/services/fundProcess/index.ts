@@ -39,7 +39,7 @@ const dashbaord = async () => {
 const raiseFund = async (data: fund, id: string) => {
   // Raise fund calculation
   const { fundId, amount, message } = data,
-    toId = (await DECODE(fundId)).split("|")[0],
+    toId = await (await DECODE(fundId)).split("|")[0],
     raiseRef = userRef.doc(toId).collection("funds").doc(fundId),
     supportersRef = raiseRef.collection("supporters").doc(id),
     referalRef = raiseRef.collection("referals").doc(id),
@@ -88,7 +88,7 @@ const raiseFund = async (data: fund, id: string) => {
 // Detail of single fund
 const detailFund = async (data: params) => {
   const { fundId } = data,
-    toId = (await DECODE(fundId)).split("|")[0],
+    toId = await (await DECODE(fundId)).split("|")[0],
   raiseRef = await userRef.doc(toId).collection("funds").doc(fundId),
   shares = (await raiseRef.collection("referals").get()).docs.map(
       (doc) => doc.data().amount

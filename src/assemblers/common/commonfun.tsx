@@ -87,7 +87,7 @@ const ApiCall = async (req: apicall) => {
 };
 
 const Share = (id: string) => {
-  const url = process.env.REACT_APP_URL + "/%23/referal/" + id;
+  const url = process.env.REACT_APP_URL + "/referal/" + id;
   window.open(`whatsapp://send?text=Form the Fundraiser ${url}`);
 };
 

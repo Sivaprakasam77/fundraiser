@@ -46,7 +46,7 @@ const addAccount = async (data: User, id: string) => {
 // Comment user to fund
 const comment = async (data: User, id: string) => {
   const { fundId, comment } = data,
-    toId = (await DECODE(fundId)).split("|")[0],
+    toId = await (await DECODE(fundId)).split("|")[0],
     user = <FirebaseFirestore.DocumentData>(await userRef.doc(id).get()).data();
   return await userRef
     .doc(toId)
