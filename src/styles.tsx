@@ -1,7 +1,7 @@
 import { makeStyles } from "@material-ui/core";
 
-const useStyles = makeStyles((theme) =>
-  ({
+const useStyles = makeStyles(
+  (theme) => ({
     center: {
       position: "absolute",
       top: "50%",
@@ -316,7 +316,8 @@ const useStyles = makeStyles((theme) =>
       overflowY: "scroll",
       zIndex: 100,
     },
-  })
+  }),
+  { index: 1 }
 );
 
 export default useStyles;

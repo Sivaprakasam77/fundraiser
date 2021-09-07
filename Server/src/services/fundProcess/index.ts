@@ -88,14 +88,17 @@ const raiseFund = async (data: fund, id: string) => {
 // Detail of single fund
 const detailFund = async (data: params) => {
   const { fundId } = data,
-    toId = (await DECODE(fundId)).split("|")[0],
-    raiseRef = userRef.doc(toId).collection("funds").doc(fundId),
-    shares = (await raiseRef.collection("referals").get()).docs.map(
+    toId = (await DECODE(fundId)).split("|")[0];
+  console.log(toId);
+  const raiseRef = await userRef.doc(toId).collection("funds").doc(fundId);
+  console.log(raiseRef);
+  const shares = (await raiseRef.collection("referals").get()).docs.map(
       (doc) => doc.data().amount
     ),
     suporters = (
       await raiseRef.collection("supporters").orderBy("amount", "desc").get()
     ).docs.map((doc) => doc.data());
+  console.log(fundId, toId);
 
   return await db
     .collectionGroup("funds")
@@ -109,7 +112,9 @@ const detailFund = async (data: params) => {
           supporters: suporters.length,
           topSupporters: suporters.slice(0, 5),
           shares: shares.length,
-          raisedByShares: shares.filter(Boolean).reduce((a, b) => parseInt(a) + parseInt(b), 0),
+          raisedByShares: shares
+            .filter(Boolean)
+            .reduce((a, b) => parseInt(a) + parseInt(b), 0),
           comments: (
             await raiseRef.collection("comments").orderBy("time").get()
           ).docs.map((doc) => doc.data()),

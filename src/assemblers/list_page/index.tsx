@@ -11,6 +11,7 @@ import { functions } from "../common";
 export default function Home() {
   const classes = useStyles(),
     [data, setData] = useState<[]>([]);
+  console.log(classes);
 
   useEffect(() => {
     functions
