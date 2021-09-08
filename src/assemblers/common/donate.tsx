@@ -13,7 +13,7 @@ import { useHistory } from "react-router";
 
 export default function Donate(props: donate) {
   const [amount, setAmount] = useState<string>("100"),
-    [message, setMessage] = useState<string>(),
+    [message, setMessage] = useState<string>(""),
     history = useHistory();
   // API call
   async function call() {
