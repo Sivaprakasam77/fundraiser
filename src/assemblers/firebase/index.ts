@@ -44,7 +44,7 @@ const GoogleSignIn = (history: History) => {
       return await GFSignUp(info.user as unknown as GFUser, history);
     })
     .catch((err) => {
-      functions.Status("error", err.message.replace("Firebase: "));
+      functions.Status("error", err.message.replace("Firebase: ",""));
     });
 };
 
@@ -56,7 +56,7 @@ const FacebookSignIn = (history: History) => {
       await GFSignUp(info.user as unknown as GFUser, history);
     })
     .catch((err) => {
-      functions.Status("error", err.message.replace("Firebase: "));
+      functions.Status("error", err.message.replace("Firebase: ",""));
     });
 };
 
