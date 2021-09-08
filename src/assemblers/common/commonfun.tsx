@@ -72,7 +72,7 @@ const ApiCall = async (req: apicall) => {
     .catch((err) => {
       return err;
     });
-    
+
   if (!info.err && info.message !== "Failed to fetch") {
     req.message ? Status("success", req.message) : Clear();
     if (req.source === "signin" || req.source === "signup")
@@ -96,6 +96,6 @@ const Share = (id: string) => {
   window.open(`whatsapp://send?text=Form the Fundraiser ${url}`);
 };
 
-const functions = { Validate, ApiCall, Share };
+const functions = { Validate, ApiCall, Share, Status, Clear };
 
 export default functions;
