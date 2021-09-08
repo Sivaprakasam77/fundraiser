@@ -4,26 +4,30 @@ import {
   ArrowBackIosRounded,
   ArrowForwardIosRounded,
 } from "@material-ui/icons";
-import assets from "../../../assets";
 import { useEffect, useState } from "react";
 
 // Page moving controller
 export default function PageMove(props: countid) {
   const classes = useStyles(),
-    dlen: number = Object.keys(assets).length - 1,
-    [nval, setNval] = useState(parseInt(props.id) - 1),
-    [pval, setPval] = useState(parseInt(props.id) + 1);
+    data = JSON.parse(sessionStorage.getItem("cards") as string),
+    dlen: number = data.length - 1,
+    [nval, setNval] = useState(0),
+    [pval, setPval] = useState(0);
   useEffect(() => {
-    nval <= 0 ? setNval(dlen) : setNval(parseInt(props.id) - 1);
-    pval >= dlen ? setPval(0) : setPval(parseInt(props.id) + 1);
+    data.forEach((c: any, i: number) => {
+      if (JSON.stringify(c).includes(props.id)) {
+        setNval(i - 1 < 0 ? dlen : i - 1);
+        setPval(i + 1 > dlen ? 0 : i + 1);
+      }
+    });
     // eslint-disable-next-line
-  }, [props.id]);
+  }, [nval,pval]);
   return (
     <div className={classes.arrow}>
-      <IconButton href={"/detail/" + nval}>
+      <IconButton href={"/detail/" + data[nval].fundId}>
         <ArrowBackIosRounded style={{ height: "3rem", width: "3rem" }} />
       </IconButton>
-      <IconButton href={"/detail/" + pval}>
+      <IconButton href={"/detail/" + data[pval].fundId}>
         <ArrowForwardIosRounded style={{ height: "3rem", width: "3rem" }} />
       </IconButton>
     </div>

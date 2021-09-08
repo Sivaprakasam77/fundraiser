@@ -72,7 +72,7 @@ const ApiCall = async (req: apicall) => {
     .catch((err) => {
       return err;
     });
-  console.log(info);
+    
   if (!info.err && info.message !== "Failed to fetch") {
     req.message ? Status("success", req.message) : Clear();
     if (req.source === "signin" || req.source === "signup")

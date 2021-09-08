@@ -20,6 +20,7 @@ export default function Home() {
         source: "dashboard",
       })
       .then((info) => {
+        sessionStorage.setItem("cards", JSON.stringify(info));
         setData(info);
       });
   }
@@ -36,6 +37,7 @@ export default function Home() {
         title: text,
       }),
     });
+    sessionStorage.setItem("cards", JSON.stringify(info));
     setData(info);
   }
 

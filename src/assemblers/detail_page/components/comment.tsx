@@ -6,7 +6,7 @@ import {
   InputLabel,
   Typography,
 } from "@material-ui/core";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Send } from "@material-ui/icons";
 import { functions } from "../../common";
 import { useHistory } from "react-router-dom";
@@ -16,12 +16,12 @@ export default function Comment(props: {
   id: string;
   call: () => void;
 }) {
-  const [text, setText] = useState<string>(),
+  const [text, setText] = useState<string>(""),
     history = useHistory();
   // API call
   function call() {
     text === "" ||
-      functions
+      (functions
         .ApiCall({
           method: "POST",
           source: "comment",
@@ -33,14 +33,17 @@ export default function Comment(props: {
           history: history,
         })
         .then((info) => {
-          info && setText(info);
-          props.call();
-        });
+          info && props.call();
+        }) &&
+        setText(""));
   }
-
+  useEffect(()=>{
+    document.getElementById("comment")?.scrollTo(0, 10000);
+  })
   return (
     <>
       <Grid
+        id="comment"
         container
         spacing={3}
         style={{
@@ -96,6 +99,7 @@ export default function Comment(props: {
                 <Send />
               </IconButton>
             }
+            value={text}
             required
           />
         </Grid>
