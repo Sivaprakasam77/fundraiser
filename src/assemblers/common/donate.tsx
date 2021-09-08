@@ -11,13 +11,6 @@ import React, { useState } from "react";
 import functions from "./commonfun";
 import { useHistory } from "react-router";
 
-interface donate {
-  title: string;
-  fundId: string;
-  open: boolean;
-  close: any;
-}
-
 export default function Donate(props: donate) {
   const [amount, setAmount] = useState<string>("100"),
     [message, setMessage] = useState<string>(),
@@ -32,9 +25,10 @@ export default function Donate(props: donate) {
         amount: amount,
         message: message,
       }),
-      dest: "/",
+      message: `Donated successfully to ${props.title}`,
       history: history,
-    })) && props.close();
+    })) && props.call();
+    props.close();
   }
 
   return (

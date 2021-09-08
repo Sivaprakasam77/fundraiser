@@ -12,7 +12,8 @@ export default function Home() {
   const classes = useStyles(),
     [data, setData] = useState<[]>([]);
 
-  useEffect(() => {
+  // API call
+  function initcall() {
     functions
       .ApiCall({
         method: "GET",
@@ -21,6 +22,9 @@ export default function Home() {
       .then((info) => {
         setData(info);
       });
+  }
+  useEffect(() => {
+    initcall();
   }, []);
 
   // Search call
@@ -60,6 +64,7 @@ export default function Home() {
                   available={v.available}
                   goal={v.goal}
                   percentage={v.percentage}
+                  call={initcall}
                 />
               );
             })}

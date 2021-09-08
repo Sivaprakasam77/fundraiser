@@ -81,7 +81,12 @@ const ApiCall = async (req: apicall) => {
     if (req.dest) req.history.push(req.dest);
     return (info.message === "Success" && true) || info.message;
   } else {
-    req.message ? Status("error", info.message) : Clear();
+    if (req.message) {
+      if (info.message === "Token not found") {
+        req.history.push("/signin");
+        Status("error", "Please signin first");
+      } else Status("error", info.message);
+    } else Clear();
     return false;
   }
 };

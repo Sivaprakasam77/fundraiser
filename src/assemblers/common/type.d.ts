@@ -39,6 +39,10 @@ interface apicall {
   history?: History<unknown>;
 }
 
-interface Window {
-  data: any;
+interface donate {
+  title: string;
+  fundId: string;
+  open: boolean;
+  close: () => void;
+  call: () => void;
 }

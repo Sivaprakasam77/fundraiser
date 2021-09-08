@@ -21,15 +21,13 @@ export default function Navigation(props: {
     [open, setOpen] = useState<boolean>(false),
     [text, setText] = useState<string>(""),
     [title, setTitle] = useState([]),
-    [user, setUser] = useState<{
-      profile: string;
-      name: string;
-      status: boolean;
-    }>({
-      profile: "",
-      name: "",
-      status: false,
-    }),
+    [user, setUser] = useState<user>(
+      (JSON.parse(sessionStorage.getItem("user") as string) as user) || {
+        profile: "",
+        name: "",
+        status: false,
+      }
+    ),
     [logout, setLogout] = useState(false);
 
   useEffect(() => {
@@ -57,9 +55,17 @@ export default function Navigation(props: {
       })
       .then(() => {
         setUser({ profile: "", name: "", status: false });
+        sessionStorage.setItem(
+          "user",
+          JSON.stringify({ profile: "", name: "", status: false })
+        );
       })
       .catch(() => {
         setUser({ profile: "", name: "", status: false });
+        sessionStorage.setItem(
+          "user",
+          JSON.stringify({ profile: "", name: "", status: false })
+        );
       });
   }
 
@@ -70,9 +76,13 @@ export default function Navigation(props: {
         source: "user",
       })
       .then((info) => {
-        info.profile
-          ? setUser({ ...info, status: true })
-          : setUser({ profile: "", name: "", status: false });
+        if (info.profile) {
+          setUser({ ...info, status: true });
+          sessionStorage.setItem(
+            "user",
+            JSON.stringify({ ...info, status: true })
+          );
+        }
       })
       .catch(() => {
         setUser({ profile: "", name: "", status: false });

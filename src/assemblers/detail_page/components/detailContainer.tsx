@@ -25,6 +25,7 @@ export default function DetailContainer(props: { data: contentdata }) {
         close={() => {
           setOpen(false);
         }}
+        call={props.data.call}
       />
       {/* Navogation */}
       <Tabs
@@ -49,7 +50,7 @@ export default function DetailContainer(props: { data: contentdata }) {
       {value === 0 && <Tabpanels data={props.data.overview} />}
       {value === 1 && <Tabpanels data={props.data.updates} />}
       {value === 2 && (
-        <Comment id={props.data.fundId} data={props.data.comments} />
+        <Comment id={props.data.fundId} data={props.data.comments} call={props.data.call} />
       )}
       {/* Bottom buttons */}
       <Grid container spacing={5}>

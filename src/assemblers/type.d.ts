@@ -9,6 +9,7 @@ interface carddata {
   available: Number;
   goal: Number;
   percentage: number;
+  call: () => void;
 }
 
 interface contentdata {
@@ -17,6 +18,7 @@ interface contentdata {
   comments: comments[];
   fundId: string;
   title: string;
+  call: () => void;
 }
 
 interface userdata {
@@ -44,6 +46,7 @@ interface objdata {
   overview: string[];
   updates: string[];
   comments: comments[];
+  call: () => void;
 }
 
 interface banner {
@@ -74,4 +77,10 @@ interface sharedata {
 
 interface dataprops {
   data: string[];
+}
+
+interface user {
+  profile: string;
+  name: string;
+  status: boolean;
 }

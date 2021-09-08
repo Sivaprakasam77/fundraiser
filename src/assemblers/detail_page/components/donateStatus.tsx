@@ -27,6 +27,7 @@ export default function DonateStatus(props: { data: carddata }) {
         close={() => {
           setOpen(false);
         }}
+        call={props.data.call}
       />
       <Grid container spacing={2}>
         <Grid item xs={12}>

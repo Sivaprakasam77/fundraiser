@@ -18,7 +18,8 @@ export default function Detail(props: { referal: boolean }) {
     { id } = useParams<{ id: string }>(),
     [data, setData] = useState<objdata>();
 
-  useEffect(() => {
+  // API call
+  function call() {
     props.referal &&
       functions.ApiCall({
         method: "GET",
@@ -30,9 +31,13 @@ export default function Detail(props: { referal: boolean }) {
         source: `detail/${id}`,
       })
       .then((info) => {
-        info && setData(info);
+        info && setData({ ...info, call: call });
       });
-  },[]);
+  }
+
+  useEffect(() => {
+    call();
+  }, []);
 
   return (
     <>
@@ -62,6 +67,9 @@ export default function Detail(props: { referal: boolean }) {
                   comments: data.comments,
                   fundId: data.fundId,
                   title: data.title,
+                  call: () => {
+                    call();
+                  },
                 }}
               />
             </Grid>

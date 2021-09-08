@@ -11,9 +11,13 @@ import { Send } from "@material-ui/icons";
 import { functions } from "../../common";
 import { useHistory } from "react-router-dom";
 
-export default function Comment(props: { data: comments[]; id: string }) {
+export default function Comment(props: {
+  data: comments[];
+  id: string;
+  call: () => void;
+}) {
   const [text, setText] = useState<string>(),
-  history=useHistory();
+    history = useHistory();
   // API call
   function call() {
     text === "" ||
@@ -25,11 +29,12 @@ export default function Comment(props: { data: comments[]; id: string }) {
             fundId: props.id,
             comment: text,
           }),
-          dest: `/detail/${props.id}`,
+          message: "Your comment posted",
           history: history,
         })
         .then((info) => {
           info && setText(info);
+          props.call();
         });
   }
 

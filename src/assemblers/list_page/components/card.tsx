@@ -33,6 +33,7 @@ export default function CardView(props: carddata) {
         close={() => {
           setOpen(false);
         }}
+        call={props.call}
       />
       <Grid item xs key={props.fundId}>
         <Card elevation={5} className={classes.card}>
