@@ -14,7 +14,7 @@ const Fconfig = {
   type: <string>process.env.TYPE,
   project_id: <string>process.env.PROJECT_ID,
   private_key_id: <string>process.env.PROJECT_KEY_ID,
-  private_key: (<string>process.env.PROJECT_KEY).replace(/\\n/g, '\n'),
+  private_key: (<string>process.env.PROJECT_KEY).replace(/\\n/g, "\n"),
   client_email: <string>process.env.CLIENT_EMAIL,
   client_id: <string>process.env.CLIENT_ID,
   auth_uri: <string>process.env.AUTH_URI,

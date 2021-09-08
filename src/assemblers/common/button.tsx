@@ -12,6 +12,7 @@ export default function Cbutton(props: buttondata) {
         textTransform: "capitalize",
       }}
       variant="outlined"
+      onClick={props.click}
     >
       <img alt="" src={props.icon} className={classes.micon} />
       {props.label}

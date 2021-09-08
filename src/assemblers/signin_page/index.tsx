@@ -7,6 +7,7 @@ import useStyles from "../../styles";
 import { Cbutton, CtextField, Logo, Separate, functions } from "../common";
 import { SyntheticEvent } from "react";
 import { useHistory } from "react-router";
+import OSignIn from "../firebase";
 
 // Sign In page
 export default function SignIn() {
@@ -30,6 +31,16 @@ export default function SignIn() {
         dest: "/",
         history: history,
       }));
+  }
+
+  // Google signin
+  function Fgoogle() {
+    OSignIn.GoogleSignIn(history as unknown as History);
+  }
+
+  // Facebook signin
+  function Ffacebook() {
+    OSignIn.FacebookSignIn(history as unknown as History);
   }
 
   return (
@@ -65,6 +76,7 @@ export default function SignIn() {
                   label={
                     window.innerWidth >= 768 ? "Sign in with Google" : "Google"
                   }
+                  click={Fgoogle}
                 />
               </Grid>
               <Grid item xs={6}>
@@ -75,6 +87,7 @@ export default function SignIn() {
                       ? "Contine with Facebook"
                       : "Facebook"
                   }
+                  click={Ffacebook}
                 />
               </Grid>
               <Grid item xs={12} color="secondary">

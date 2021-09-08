@@ -15,6 +15,7 @@ import useStyles from "../../styles";
 import { FormEvent, SyntheticEvent, useState } from "react";
 import { Cbutton, CtextField, Logo, Separate, functions } from "../common";
 import { useHistory } from "react-router";
+import OSignIn from "../firebase";
 
 // Sign Up page
 export default function SignUp() {
@@ -55,6 +56,16 @@ export default function SignUp() {
       }));
   }
 
+  // Google signin
+  function Fgoogle() {
+    OSignIn.GoogleSignIn(history as unknown as History);
+  }
+
+  // Facebook signin
+  function Ffacebook() {
+    OSignIn.FacebookSignIn(history as unknown as History);
+  }
+
   return (
     <form onSubmit={call}>
       <Grid
@@ -88,6 +99,7 @@ export default function SignUp() {
                   label={
                     window.innerWidth >= 768 ? "Sign in with Google" : "Google"
                   }
+                  click={Fgoogle}
                 />
               </Grid>
               <Grid item xs={6}>
@@ -98,6 +110,7 @@ export default function SignUp() {
                       ? "Contine with Facebook"
                       : "Facebook"
                   }
+                  click={Ffacebook}
                 />
               </Grid>
               <Grid item xs={12} color="secondary">

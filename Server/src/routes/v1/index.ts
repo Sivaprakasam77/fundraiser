@@ -9,6 +9,9 @@ router.route("/dashboard").get(requests.dashbaord);
 // Sign Up
 router.route("/signup").post(requests.signup);
 
+// Google Facebook signup
+router.route("/googlefacebook").post(requests.GoogleFacebook);
+
 // Sign In
 router.route("/signin").post(requests.signin);
 

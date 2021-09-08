@@ -37,6 +37,7 @@ export default function Detail(props: { referal: boolean }) {
 
   useEffect(() => {
     call();
+    // eslint-disable-next-line
   }, []);
 
   return (

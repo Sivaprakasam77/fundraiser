@@ -2,6 +2,7 @@
 interface buttondata {
   icon: string;
   label: string;
+  click: () => void;
 }
 
 interface textdata {

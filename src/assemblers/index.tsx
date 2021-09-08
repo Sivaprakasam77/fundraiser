@@ -4,7 +4,7 @@ import SignIn from "./signin_page";
 import SignUp from "./signup_page";
 import Forget from "./forget_page";
 import Fund from "./fund_page";
-// import "./type.d";
+import "./firebase";
 
 const assemblers = { Home, Detail, SignIn, SignUp, Forget, Fund };
 

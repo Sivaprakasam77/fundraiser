@@ -11,6 +11,7 @@ interface User {
   upiId: string;
   fundId: string;
   comment: string;
+  name: string;
 }
 
 interface fund {

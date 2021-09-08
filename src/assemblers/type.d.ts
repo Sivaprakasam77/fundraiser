@@ -84,3 +84,10 @@ interface user {
   name: string;
   status: boolean;
 }
+
+interface GFUser {
+  photoURL: string;
+  email: string;
+  displayName: string;
+  accessToken: string;
+}

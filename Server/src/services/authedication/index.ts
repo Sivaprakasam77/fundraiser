@@ -103,4 +103,26 @@ const forget = async (data: User) => {
     });
 };
 
-export default { signin, signup, signout, forget };
+// Google facebook signin
+const GoogleFacebook = async (data: User, id: string) => {
+  const { profile, name, upiId, email } = data;
+  return await userRef
+    .doc(id)
+    .set({
+      profile: profile,
+      name: `${name}`,
+      email: email,
+      upiId: upiId,
+    })
+    .then(() => {
+      return {
+        err: false,
+        message: { err: false, message: "Success" },
+      };
+    })
+    .catch((err) => {
+      return { err: true, message: err.message };
+    });
+};
+
+export default { signin, signup, signout, forget, GoogleFacebook };

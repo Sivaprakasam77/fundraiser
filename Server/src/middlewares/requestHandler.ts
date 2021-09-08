@@ -21,9 +21,25 @@ const signup = async (req: Request, res: Response, next: NextFunction) => {
   else next(info);
 };
 
+// Google Facebook signin
+const GoogleFacebook = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const id: err = await Verify(
+      (<{ headers: { authorization: string } }>req).headers.authorization.split(
+        " "
+      )[1]
+    ),
+    info: err = await auth.GoogleFacebook(req.body, id.message);
+  if (!info.err) res.status(200).send(info);
+  else next(info);
+};
+
 // Sign Out
 const signout = async (req: Request, res: Response, next: NextFunction) => {
-  const id:err = await Verify(
+  const id: err = await Verify(
       (<{ headers: { authorization: string } }>req).headers.authorization.split(
         " "
       )[1]
@@ -47,7 +63,7 @@ const forget = async (req: Request, res: Response, next: NextFunction) => {
 
 // Get user detail
 const getUser = async (req: Request, res: Response, next: NextFunction) => {
-  const id:err = await Verify(
+  const id: err = await Verify(
       (<{ headers: { authorization: string } }>req).headers.authorization.split(
         " "
       )[1]
@@ -62,7 +78,7 @@ const getUser = async (req: Request, res: Response, next: NextFunction) => {
 
 // Edit user details
 const userEdit = async (req: Request, res: Response, next: NextFunction) => {
-  const id:err = await Verify(
+  const id: err = await Verify(
       (<{ headers: { authorization: string } }>req).headers.authorization.split(
         " "
       )[1]
@@ -77,7 +93,7 @@ const userEdit = async (req: Request, res: Response, next: NextFunction) => {
 
 // Add bank account removed
 const addAccount = async (req: Request, res: Response, next: NextFunction) => {
-  const id:err = await Verify(
+  const id: err = await Verify(
       (<{ headers: { authorization: string } }>req).headers.authorization.split(
         " "
       )[1]
@@ -92,7 +108,7 @@ const addAccount = async (req: Request, res: Response, next: NextFunction) => {
 
 // Comment user to fund
 const comment = async (req: Request, res: Response, next: NextFunction) => {
-  const id:err = await Verify(
+  const id: err = await Verify(
       (<{ headers: { authorization: string } }>req).headers.authorization.split(
         " "
       )[1]
@@ -109,7 +125,7 @@ const comment = async (req: Request, res: Response, next: NextFunction) => {
 
 // Fund collector request creation
 const createFund = async (req: Request, res: Response, next: NextFunction) => {
-  const id:err = await Verify(
+  const id: err = await Verify(
       (<{ headers: { authorization: string } }>req).headers.authorization.split(
         " "
       )[1]
@@ -124,7 +140,7 @@ const createFund = async (req: Request, res: Response, next: NextFunction) => {
 
 // Fund collector detail edit
 const editFund = async (req: Request, res: Response, next: NextFunction) => {
-  const id:err = await Verify(
+  const id: err = await Verify(
       (<{ headers: { authorization: string } }>req).headers.authorization.split(
         " "
       )[1]
@@ -139,7 +155,7 @@ const editFund = async (req: Request, res: Response, next: NextFunction) => {
 
 // Delete fund detail
 const deleteFund = async (req: Request, res: Response, next: NextFunction) => {
-  const id:err = await Verify(
+  const id: err = await Verify(
       (<{ headers: { authorization: string } }>req).headers.authorization.split(
         " "
       )[1]
@@ -154,13 +170,16 @@ const deleteFund = async (req: Request, res: Response, next: NextFunction) => {
 
 // Referal fund detail
 const referalFund = async (req: Request, res: Response, next: NextFunction) => {
-  const id:err = await Verify(
+  const id: err = await Verify(
       (<{ headers: { authorization: string } }>req).headers.authorization.split(
         " "
       )[1]
     ),
     info: err = (!id.err &&
-      (await fund.referalFund({ fundId: <string>req.params.fundId }, id.message))) || {
+      (await fund.referalFund(
+        { fundId: <string>req.params.fundId },
+        id.message
+      ))) || {
       err: true,
       message: "Token not found",
     };
@@ -179,12 +198,13 @@ const dashbaord = async (req: Request, res: Response, next: NextFunction) => {
 
 // Fund donation to the user
 const raiseFund = async (req: Request, res: Response, next: NextFunction) => {
-  const id:err = await Verify(
+  const id: err = await Verify(
       (<{ headers: { authorization: string } }>req).headers.authorization.split(
         " "
       )[1]
     ),
-    info: err = (!id.err && (await fundProcess.raiseFund(req.body, id.message))) || {
+    info: err = (!id.err &&
+      (await fundProcess.raiseFund(req.body, id.message))) || {
       err: true,
       message: "Token not found",
     };
@@ -218,6 +238,7 @@ const searchFund = async (req: Request, res: Response, next: NextFunction) => {
 export default {
   signin,
   signup,
+  GoogleFacebook,
   addAccount,
   signout,
   forget,
