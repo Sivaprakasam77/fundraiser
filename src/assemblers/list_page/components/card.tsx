@@ -53,7 +53,7 @@ export default function CardView(props: carddata) {
           </IconButton>
           <CardContent>
             <Grid container spacing={1} style={{ marginTop: "-1rem" }}>
-              <Grid style={{ color: "#00e676" }} item>
+              <Grid style={{ color: "#00e676" }} item xs={12}>
                 <Typography
                   style={{ display: "flex", alignItems: "center" }}
                   variant="body2"
@@ -65,10 +65,14 @@ export default function CardView(props: carddata) {
                   {props.date}
                 </Typography>
               </Grid>
-              <Grid item>
+              <Grid item xs={12}>
                 <Typography variant="h6">{props.title}</Typography>
               </Grid>
-              <Grid item style={{ display: "flex", alignItems: "center" }}>
+              <Grid
+                item
+                xs={12}
+                style={{ display: "flex", alignItems: "center" }}
+              >
                 <Avatar src={props.profile} className={classes.micon} />
                 <Typography component={"span"} variant="body2">
                   {props.name}
@@ -81,7 +85,7 @@ export default function CardView(props: carddata) {
                   className={classes.linearBar}
                 />
               </Grid>
-              <Grid item>
+              <Grid item xs={12}>
                 <Typography component={"span"} variant="body2">
                   Raised: ₹{props.available}
                   <span style={{ color: "red", marginLeft: "2rem" }}>
@@ -92,10 +96,14 @@ export default function CardView(props: carddata) {
               <Grid item xs={12}>
                 <Typography color="textSecondary" variant="caption">
                   <img alt="" src={Timelapse} className={classes.sicon} /> days
+                  {Math.round(
+                    new Date(props.date).getTime() -
+                      Date.now() / (24 * 3600 * 1000)
+                  )}
                   left
                 </Typography>
               </Grid>
-              <Grid item xs>
+              <Grid item xs={12}>
                 <Button
                   className={classes.mbutton1}
                   onClick={() => {

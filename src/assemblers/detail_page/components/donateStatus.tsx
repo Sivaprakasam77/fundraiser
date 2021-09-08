@@ -102,7 +102,7 @@ export default function DonateStatus(props: { data: carddata }) {
             variant="subtitle2"
           >
             <img alt="" src={Timelapse} className={classes.sicon} />
-            {props.data.date} days left
+            {Math.round(((new Date(props.data.date)).getTime()-Date.now())/(24*3600*1000))} days left
           </Typography>
         </Grid>
       </Grid>
